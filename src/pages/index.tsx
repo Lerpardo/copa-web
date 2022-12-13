@@ -6,6 +6,7 @@ import Image from "next/image";
 import appPreview from "../assets/aplicacao-trilha-ignite.png";
 import logo from "../assets/logo.svg";
 import avatar from "../assets/avatares.png";
+import icon from "../assets/icon.svg";
 
 export default function Home(props: HomeProps) {
   return (
@@ -14,7 +15,7 @@ export default function Home(props: HomeProps) {
         <Image src={logo} alt="logo" quality={100} />
 
         <h1>Crie seu próprio bolão da copa e compartilhe entre amigos!</h1>
-        
+
         <div>
           <Image src={avatar} alt="avatares" quality={100} />
           <strong>
@@ -27,7 +28,28 @@ export default function Home(props: HomeProps) {
           <button type="submit">Criar meu bolão</button>
         </form>
 
-        <p>Após criar seu bolão, você receberá um código único que poderá usar para convidar outras pessoas.</p>
+        <p>
+          Após criar seu bolão, você receberá um código único que poderá usar
+          para convidar outras pessoas.
+        </p>
+
+        <div>
+          <div>
+            <Image src={icon} alt="icon-checked" />
+            <div>
+              <span>+2.034</span>
+              <span>Bolões Criados</span>
+            </div>
+          </div>
+
+          <div>
+            <Image src={icon} alt="icon-checked" />
+            <div>
+              <span>+192.847</span>
+              <span>Palpites Enviados</span>
+            </div>
+          </div>
+        </div>
       </main>
       <Image src={appPreview} alt="appPreview" quality={100} />
       <h3>{props.count}</h3>
