@@ -26,6 +26,8 @@ export default function Home(props: HomeProps) {
           <input type="text" required placeholder="Qual nome do seu bolão" />
           <button type="submit">Criar meu bolão</button>
         </form>
+
+        <p>Após criar seu bolão, você receberá um código único que poderá usar para convidar outras pessoas.</p>
       </main>
       <Image src={appPreview} alt="appPreview" quality={100} />
       <h3>{props.count}</h3>
