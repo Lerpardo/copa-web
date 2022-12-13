@@ -1,17 +1,35 @@
 interface HomeProps {
-  count: number,
+  count: number;
 }
 
 import Image from "next/image";
-import appPreview from '../assets/aplicacao-trilha-ignite.png'
+import appPreview from "../assets/aplicacao-trilha-ignite.png";
+import logo from "../assets/logo.svg";
+import avatar from "../assets/avatares.png";
+
 export default function Home(props: HomeProps) {
   return (
-    <>
-      <h1>Hello TypeScript</h1>
-      <p>teste</p>
-      <Image src={appPreview} alt='appPreview' quality={100}/>
+    <div>
+      <main>
+        <Image src={logo} alt="logo" quality={100} />
+
+        <h1>Crie seu próprio bolão da copa e compartilhe entre amigos!</h1>
+        
+        <div>
+          <Image src={avatar} alt="avatares" quality={100} />
+          <strong>
+            <span>+12.592</span> pessoas já estão usando
+          </strong>
+        </div>
+
+        <form>
+          <input type="text" required placeholder="Qual nome do seu bolão" />
+          <button type="submit">Criar meu bolão</button>
+        </form>
+      </main>
+      <Image src={appPreview} alt="appPreview" quality={100} />
       <h3>{props.count}</h3>
-    </>
+    </div>
   );
 }
 
