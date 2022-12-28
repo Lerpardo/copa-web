@@ -14,8 +14,16 @@ import { FormEvent, useState } from "react";
 
 export default function Home(props: HomeProps) {
   const [poolTitle,setPoolTitle] = useState('') 
-  function createPool(event:FormEvent) {
+  async function createPool(event:FormEvent) {
     event.preventDefault()
+    try {
+      await api.post('/pools', {
+        title: poolTitle,
+      })
+    } catch (error) {
+      console.error(error);
+      
+    }
   }
   return (
     <div className="max-w-[1124px] h-screen mx-auto grid grid-cols-2 gap-28 items-center">
