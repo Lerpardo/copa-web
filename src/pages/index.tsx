@@ -1,5 +1,6 @@
 interface HomeProps {
-  count: number;
+  poolCount: number;
+  guessCount: number;
 }
 
 import Image from "next/image";
@@ -7,6 +8,7 @@ import appPreview from "../assets/aplicacao-trilha-ignite.png";
 import logo from "../assets/logo.svg";
 import avatar from "../assets/avatares.png";
 import icon from "../assets/icon.svg";
+import { api } from "../lib/axios";
 
 export default function Home(props: HomeProps) {
   return (
@@ -50,34 +52,37 @@ export default function Home(props: HomeProps) {
           <div className="flex items-center gap-6">
             <Image src={icon} alt="icon-checked" />
             <div className="flex flex-col">
-              <span className="font-bold text-2xl">+2.034</span>
+              <span className="font-bold text-2xl">+{props.poolCount}</span>
               <span>Bolões Criados</span>
             </div>
           </div>
-          <div className="w-px h-14 bg-gray-600"/>
+          <div className="w-px h-14 bg-gray-600" />
           <div className="flex items-center gap-6">
             <Image src={icon} alt="icon-checked" />
             <div className="flex flex-col">
-              <span className="font-bold text-2xl">+192.847</span>
+              <span className="font-bold text-2xl">+{props.guessCount}</span>
               <span>Palpites Enviados</span>
             </div>
           </div>
         </div>
       </main>
       <Image src={appPreview} alt="appPreview" quality={100} />
-      <h3>{props.count}</h3>
     </div>
   );
 }
 
 export const getServerSideProps = async () => {
-  const request = await fetch("http://localhost:4444/pools/count");
-  const response = await request.json();
-  console.log(response);
+  const [poolCounterResponse, guessCounterResponse,usersCounterResponse] = await Promise.all([
+    api.get("/pools/count"),
+    api.get("/guesses/count"),
+    api.get("/users/count"),
+  ]);
 
   return {
     props: {
-      count: response.countPool,
+      poolCount: poolCounterResponse.data.count,
+      guessCount: guessCounterResponse.data.count,
+      userCount: usersCounterResponse.data.count,
     },
   };
 };
