@@ -21,8 +21,8 @@ export default function Home(props: HomeProps) {
         title: poolTitle,
       })
     } catch (error) {
-      console.error(error);
-      
+      console.log(error);
+      alert('Falha ao criar o bolão,tente novamente')      
     }
   }
   return (
