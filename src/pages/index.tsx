@@ -1,6 +1,7 @@
 interface HomeProps {
   poolCount: number;
   guessCount: number;
+  userCount: number,
 }
 
 import Image from "next/image";
@@ -9,8 +10,13 @@ import logo from "../assets/logo.svg";
 import avatar from "../assets/avatares.png";
 import icon from "../assets/icon.svg";
 import { api } from "../lib/axios";
+import { FormEvent, useState } from "react";
 
 export default function Home(props: HomeProps) {
+  const [poolTitle,setPoolTitle] = useState('') 
+  function createPool(event:FormEvent) {
+    event.preventDefault()
+  }
   return (
     <div className="max-w-[1124px] h-screen mx-auto grid grid-cols-2 gap-28 items-center">
       <main>
@@ -23,17 +29,18 @@ export default function Home(props: HomeProps) {
         <div className="mt-10 flex items-center gap-2">
           <Image src={avatar} alt="avatares" />
           <strong className="text-gray-100">
-            <span className="text-ignite-500">+12.592</span> pessoas já estão
+            <span className="text-ignite-500">+{props.userCount}</span> pessoas já estão
             usando
           </strong>
         </div>
 
-        <form className="mt-10 flex gap-2">
+        <form onSubmit={createPool} className="mt-10 flex gap-2">
           <input
             type="text"
-            className="flex-1 px-6 py-4 rounded bg-gray-800 border border-gray-600 text-sm"
+            className="flex-1 px-6 py-4 rounded bg-gray-800 border border-gray-600 text-sm text-gray-100"
             required
             placeholder="Qual nome do seu bolão?"
+            onChange={event => setPoolTitle(event.target.value)}
           />
           <button
             className="bg-yellow-500 px-6 py-4 rounded text-gray-900 font-bold text-sm uppercase hover:bg-white-700"
