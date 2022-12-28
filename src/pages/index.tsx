@@ -17,9 +17,13 @@ export default function Home(props: HomeProps) {
   async function createPool(event:FormEvent) {
     event.preventDefault()
     try {
-      await api.post('/pools', {
+      const response = await api.post('/pools', {
         title: poolTitle,
       })
+
+      const { code } = response.data
+
+      await navigator.clipboard.writeText(code);
     } catch (error) {
       console.log(error);
       alert('Falha ao criar o bolão,tente novamente')      
